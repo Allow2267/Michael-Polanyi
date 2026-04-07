@@ -1,5 +1,10 @@
 # Michael Polanyi
 
+[![Release](https://img.shields.io/github/v/release/August1314/Michael-Polanyi)](https://github.com/August1314/Michael-Polanyi/releases)
+[![License](https://img.shields.io/github/license/August1314/Michael-Polanyi)](https://github.com/August1314/Michael-Polanyi/blob/main/LICENSE)
+[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-skill-7C3AED)](https://github.com/August1314/Michael-Polanyi)
+[![GitHub Repo stars](https://img.shields.io/github/stars/August1314/Michael-Polanyi?style=social)](https://github.com/August1314/Michael-Polanyi)
+
 A writing skill inspired by Michael Polanyi's ideas of tacit knowledge, personal knowledge, and integrative judgment.
 
 Use it when you want AI responses to sound less like a polished summary and more like an experienced practitioner: grounded, directional, bounded, and practically useful.
