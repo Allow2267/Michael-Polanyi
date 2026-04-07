@@ -132,38 +132,39 @@ jobs:
 
       - name: Validate evals.json syntax
         run: |
-          if [ -f "$SKILL_PATH/evals/evals.json" ]; then
-            python3 -c "import json; json.load(open('$SKILL_PATH/evals/evals.json'))"
+          EVALS_JSON="${{ env.SKILL_PATH }}/evals/evals.json"
+          if [ -f "$EVALS_JSON" ]; then
+            python3 -c "import json; json.load(open('$EVALS_JSON'))"
             echo "✓ evals.json is valid JSON"
             
             # Check for required fields
-            python3 << 'EOF'
-          import json
-          import sys
-          
-          with open('$SKILL_PATH/evals/evals.json') as f:
-              data = json.load(f)
-          
-          evals = data.get('evals', [])
-          errors = []
-          
-          for i, e in enumerate(evals):
-              if 'id' not in e:
-                  errors.append(f"Eval {i}: missing 'id'")
-              if 'eval_name' not in e:
-                  errors.append(f"Eval {i}: missing 'eval_name'")
-              if 'prompt' not in e:
-                  errors.append(f"Eval {i}: missing 'prompt'")
-              if 'assertions' not in e or len(e.get('assertions', [])) == 0:
-                  errors.append(f"Eval {i}: missing or empty 'assertions'")
-          
-          if errors:
-              for e in errors:
-                  print(f"✗ {e}")
-              sys.exit(1)
-          else:
-              print(f"✓ All {len(evals)} evals have required fields")
-          EOF
+            python3 << EOF
+import json
+import sys
+
+with open('$EVALS_JSON') as f:
+    data = json.load(f)
+
+evals = data.get('evals', [])
+errors = []
+
+for i, e in enumerate(evals):
+    if 'id' not in e:
+        errors.append(f"Eval {i}: missing 'id'")
+    if 'eval_name' not in e:
+        errors.append(f"Eval {i}: missing 'eval_name'")
+    if 'prompt' not in e:
+        errors.append(f"Eval {i}: missing 'prompt'")
+    if 'assertions' not in e or len(e.get('assertions', [])) == 0:
+        errors.append(f"Eval {i}: missing or empty 'assertions'")
+
+if errors:
+    for e in errors:
+        print(f"✗ {e}")
+    sys.exit(1)
+else:
+    print(f"✓ All {len(evals)} evals have required fields")
+EOF
           fi
 
   # ─────────────────────────────────────────────
