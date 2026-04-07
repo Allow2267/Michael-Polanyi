@@ -13,8 +13,4 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run Python
-        run: |
-          python3 -c "
-import json
-print('hello')
-"
+        run: python3 -c "import json; print('hello')"
