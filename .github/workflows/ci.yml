@@ -12,9 +12,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Test multi-line string
-        run: |
-          python3 -c "
-import json
-print('hello')
-"
+      - name: Test heredoc
+        run: python3 <<EOF; echo done
+print("hello")
+EOF
