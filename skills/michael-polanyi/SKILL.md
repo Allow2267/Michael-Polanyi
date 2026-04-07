@@ -175,10 +175,12 @@ See `examples.md` for full before/after demonstrations.
 
 ## Supporting Resources
 
-| File               | Purpose                                                         |
-| ------------------ | --------------------------------------------------------------- |
-| `examples.md`      | Before/after examples demonstrating the skill's impact          |
-| `polanyi-notes.md` | Detailed notes on Polanyi's core concepts and their application |
+| File                              | When to Read                                                                          |
+| --------------------------------- | ------------------------------------------------------------------------------------- |
+| `examples.md`                     | Always — before/after demonstrations                                                  |
+| `polanyi-notes.md`                | When you need to understand the core concepts                                         |
+| `references/response-patterns.md` | When SKILL.md summary isn't enough — extended patterns and deep anti-pattern analysis |
+| `scripts/detect_fluff.py`         | Run to scan a response for AI-generic patterns                                        |
 
 ---
 

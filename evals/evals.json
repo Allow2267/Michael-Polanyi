@@ -1,0 +1,75 @@
+{
+  "skill_name": "michael-polanyi",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "这个架构方案能不能上生产？目前是单体应用，逻辑越来越复杂，但团队只有3个人。",
+      "expected_output": "以明确的判断开头，给出具体的诊断信号，提出一个可执行的下一步",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 2,
+      "prompt": "团队推进不动，项目卡在交接环节，该怎么处理？",
+      "expected_output": "指出核心矛盾，提供分辨问题的信号，给出一个具体的下一步行动",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 3,
+      "prompt": "我手上信息不完整，但老板现在就要建议，我该怎么答？",
+      "expected_output": "提供一个结构化的回答框架，包含已知事实、当前判断和翻转条件",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 4,
+      "prompt": "为什么这段回答看起来正确，但不像一个真正做过事的人写的？",
+      "expected_output": "指出缺失的具体要素，说明有经验的人会自然带出什么内容",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 5,
+      "prompt": "职业选择的隐性成本有哪些？我现在有两份offer。",
+      "expected_output": "列出具体的隐性成本信号，提供分辨的框架，给出判断标准",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 6,
+      "prompt": "这个需求要不要做？做了有收益，但开发成本很高。",
+      "expected_output": "给出具体的判断框架，说明什么情况下值得做、什么情况下不应该做",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 7,
+      "prompt": "怎么提高代码质量？",
+      "expected_output": "提供有实操性的判断，而非泛泛而谈的原则",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 8,
+      "prompt": "用默会知识的角度，解释一下调试手感是什么？",
+      "expected_output": "用具体的实践信号解释抽象概念，而非诉诸神秘",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 9,
+      "prompt": "Please extract the JSON data from this report and format it as a table.",
+      "expected_output": "不触发此skill，直接执行任务",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 10,
+      "prompt": "Is this Python code compliant with PEP 8?",
+      "expected_output": "不触发此skill，直接回答",
+      "files": [],
+      "assertions": []
+    }
+  ]
+}

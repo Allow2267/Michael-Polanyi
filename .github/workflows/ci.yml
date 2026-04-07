@@ -74,7 +74,7 @@ jobs:
 
       - name: Verify eval files exist
         run: |
-          eval_files=("evals/prompts.md" "evals/rubric.md" "evals/protocol.md")
+          eval_files=("evals/prompts.md" "evals/rubric.md" "evals/protocol.md" "evals/evals.json")
           for file in "${eval_files[@]}"; do
             if [ -f "$file" ]; then
               echo "✓ $file exists"
@@ -82,3 +82,21 @@ jobs:
               echo "⚠ $file missing (optional)"
             fi
           done
+
+  quality-check:
+    name: Check example outputs for AI fluff
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Scan practitioner answers for generic patterns
+        run: |
+          # Extract practitioner answers from examples.md and check for fluff
+          # We expect zero errors in the "better" answers
+          python skills/michael-polanyi/scripts/detect_fluff.py skills/michael-polanyi/examples.md
+          echo "✓ No critical AI fluff patterns detected in examples"
