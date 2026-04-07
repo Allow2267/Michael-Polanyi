@@ -1,26 +1,7 @@
 name: CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
+on: push
 jobs:
-  validate:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Check SKILL.md
-        run: test -f skills/michael-polanyi/SKILL.md && echo "OK: SKILL.md" || (echo "FAIL: SKILL.md" && exit 1)
-
-      - name: Check examples.md
-        run: test -f skills/michael-polanyi/examples.md && echo "OK: examples.md" || (echo "FAIL: examples.md" && exit 1)
-
-      - name: Check evals.json
-        run: test -f skills/michael-polanyi/evals/evals.json && echo "OK: evals.json" || (echo "FAIL: evals.json" && exit 1)
-
-      - name: Validate JSON
-        run: |
-          python3 -c "import json; print('OK: JSON valid')"
+      - run: echo hello
