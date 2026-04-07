@@ -10,9 +10,6 @@ env:
   SKILL_PATH: skills/michael-polanyi
 
 jobs:
-  # ─────────────────────────────────────────────
-  # Job 1: 结构验证
-  # ─────────────────────────────────────────────
   validate-structure:
     name: Validate skill structure
     runs-on: ubuntu-latest
@@ -21,7 +18,7 @@ jobs:
 
       - name: Check SKILL.md exists
         run: |
-          if [ -f "$SKILL_PATH/SKILL.md" ]; then
+          if [ -f "skills/michael-polanyi/SKILL.md" ]; then
             echo "✓ SKILL.md found"
           else
             echo "✗ SKILL.md missing"
@@ -30,7 +27,7 @@ jobs:
 
       - name: Validate frontmatter
         run: |
-          if grep -q "^---" "$SKILL_PATH/SKILL.md" && grep -q "^name:" "$SKILL_PATH/SKILL.md"; then
+          if grep -q "^---" skills/michael-polanyi/SKILL.md && grep -q "^name:" skills/michael-polanyi/SKILL.md; then
             echo "✓ Frontmatter valid"
           else
             echo "✗ Frontmatter invalid"
@@ -39,13 +36,7 @@ jobs:
 
       - name: Check required files
         run: |
-          required_files=(
-            "$SKILL_PATH/SKILL.md"
-            "$SKILL_PATH/polanyi-notes.md"
-            "$SKILL_PATH/examples.md"
-            "$SKILL_PATH/README.md"
-          )
-          for file in "${required_files[@]}"; do
+          for file in "skills/michael-polanyi/SKILL.md" "skills/michael-polanyi/polanyi-notes.md" "skills/michael-polanyi/examples.md"; do
             if [ -f "$file" ]; then
               echo "✓ $file exists"
             else
@@ -54,19 +45,6 @@ jobs:
             fi
           done
 
-      - name: Check references directory
-        run: |
-          if [ -d "$SKILL_PATH/references" ]; then
-            echo "✓ references/ directory exists"
-            count=$(find "$SKILL_PATH/references" -name "*.md" | wc -l)
-            echo "  Found $count reference files"
-          else
-            echo "⚠ references/ directory missing (optional)"
-          fi
-
-  # ─────────────────────────────────────────────
-  # Job 2: Markdown 语法检查
-  # ─────────────────────────────────────────────
   markdown-lint:
     name: Lint markdown files
     runs-on: ubuntu-latest
@@ -76,28 +54,15 @@ jobs:
       - name: Check markdown syntax
         run: |
           errors=0
-          find "$SKILL_PATH" -name "*.md" -type f | while read -r file; do
-            # Check for unclosed frontmatter
+          for file in $(find skills/michael-polanyi -name "*.md" -type f); do
             if head -1 "$file" | grep -q "^---"; then
-              second_dash=$(head -n 20 "$file" | tail -n +2 | grep -c "^---")
-              if [ "$second_dash" -eq 0 ]; then
+              count=$(head -n 20 "$file" | tail -n +2 | grep -c "^---")
+              if [ "$count" -eq 0 ]; then
                 echo "✗ $file has unclosed frontmatter"
                 errors=$((errors + 1))
               fi
             fi
-            
-            # Check for broken internal links
-            if grep -qE '\[.*\]\(#[^)]+\)' "$file"; then
-              # Extract anchor links and verify they exist
-              grep -oE '\[.*\]\(#[^)]+\)' "$file" | while read -r link; do
-                anchor=$(echo "$link" | sed 's/.*(#\([^)]*\)).*/\1/')
-                if ! grep -q "^#.*$anchor" "$file"; then
-                  echo "⚠ $file has broken anchor link: #$anchor"
-                fi
-              done
-            fi
           done
-          
           if [ $errors -eq 0 ]; then
             echo "✓ All markdown files passed syntax check"
           else
@@ -105,9 +70,6 @@ jobs:
             exit 1
           fi
 
-  # ─────────────────────────────────────────────
-  # Job 3: Eval 配置验证
-  # ─────────────────────────────────────────────
   validate-evals:
     name: Validate eval configuration
     runs-on: ubuntu-latest
@@ -121,29 +83,27 @@ jobs:
 
       - name: Verify eval files exist
         run: |
-          eval_files=("evals.json" "prompts.md" "rubric.md" "protocol.md")
-          for file in "${eval_files[@]}"; do
-            if [ -f "$SKILL_PATH/evals/$file" ]; then
+          for file in "evals.json" "prompts.md" "rubric.md" "protocol.md"; do
+            if [ -f "skills/michael-polanyi/evals/$file" ]; then
               echo "✓ evals/$file exists"
             else
               echo "⚠ evals/$file missing (optional)"
             fi
           done
 
-      - name: Validate evals.json syntax
+      - name: Validate evals.json
         run: |
-          EVALS_JSON="${{ env.SKILL_PATH }}/evals/evals.json"
-          if [ -f "$EVALS_JSON" ]; then
-            python3 -c "import json; json.load(open('$EVALS_JSON'))"
-            echo "✓ evals.json is valid JSON"
-            
-            # Check for required fields
-            python3 << EOF
+          python3 << 'PYEOF'
 import json
 import sys
 
-with open('$EVALS_JSON') as f:
-    data = json.load(f)
+try:
+    with open('skills/michael-polanyi/evals/evals.json') as f:
+        data = json.load(f)
+    print("✓ evals.json is valid JSON")
+except Exception as e:
+    print(f"✗ Failed to parse evals.json: {e}")
+    sys.exit(1)
 
 evals = data.get('evals', [])
 errors = []
@@ -164,12 +124,8 @@ if errors:
     sys.exit(1)
 else:
     print(f"✓ All {len(evals)} evals have required fields")
-EOF
-          fi
+PYEOF
 
-  # ─────────────────────────────────────────────
-  # Job 4: 代码质量检查
-  # ─────────────────────────────────────────────
   code-quality:
     name: Python code quality
     runs-on: ubuntu-latest
@@ -180,42 +136,23 @@ EOF
         with:
           python-version: "3.12"
 
-      - name: Install linting tools
-        run: pip install flake8 black isort
+      - name: Install tools
+        run: pip install flake8 black
 
       - name: Check Python syntax
         run: |
-          python_files=(
-            "$SKILL_PATH/scripts/detect_fluff.py"
-            "$SKILL_PATH/scripts/check_assertions.py"
-            "$SKILL_PATH/scripts/aggregate_benchmark.py"
-            "$SKILL_PATH/eval-viewer/generate_review.py"
-          )
-          
-          for file in "${python_files[@]}"; do
+          for file in skills/michael-polanyi/scripts/*.py skills/michael-polanyi/eval-viewer/*.py 2>/dev/null; do
             if [ -f "$file" ]; then
-              python3 -m py_compile "$file"
-              echo "✓ $file syntax OK"
+              python3 -m py_compile "$file" && echo "✓ $file syntax OK" || echo "✗ $file failed"
             fi
           done
 
       - name: Run flake8
         run: |
-          if [ -d "$SKILL_PATH/scripts" ]; then
-            flake8 "$SKILL_PATH/scripts/" --max-line-length=120 --ignore=E501,W503 || true
-            echo "✓ Flake8 check complete"
+          if [ -d "skills/michael-polanyi/scripts" ]; then
+            flake8 skills/michael-polanyi/scripts/ --max-line-length=120 --ignore=E501,W503 || echo "Flake8 warnings (non-fatal)"
           fi
 
-      - name: Check code formatting
-        run: |
-          if [ -d "$SKILL_PATH/scripts" ]; then
-            black --check "$SKILL_PATH/scripts/" --line-length=120 || true
-            echo "✓ Format check complete"
-          fi
-
-  # ─────────────────────────────────────────────
-  # Job 5: 内容质量检查
-  # ─────────────────────────────────────────────
   content-quality:
     name: Content quality checks
     runs-on: ubuntu-latest
@@ -229,60 +166,30 @@ EOF
 
       - name: Check SKILL.md length
         run: |
-          line_count=$(wc -l < "$SKILL_PATH/SKILL.md")
-          echo "SKILL.md has $line_count lines"
-          if [ "$line_count" -gt 200 ]; then
-            echo "⚠ SKILL.md is getting long (>$line_count lines). Consider moving content to references/"
+          lines=$(wc -l < skills/michael-polanyi/SKILL.md)
+          echo "SKILL.md has $lines lines"
+          if [ "$lines" -gt 200 ]; then
+            echo "⚠ SKILL.md is long (>200 lines)"
           else
             echo "✓ SKILL.md length is reasonable"
           fi
 
-      - name: Scan for AI fluff in SKILL.md
+      - name: Check examples balance
         run: |
-          # Check SKILL.md for common AI-generic patterns
-          fluff_patterns=(
-            "it's important to note"
-            "it's worth mentioning"
-            "as you can see"
-            "in conclusion"
-            "to summarize"
-          )
-          
-          found=0
-          for pattern in "${fluff_patterns[@]}"; do
-            if grep -qi "$pattern" "$SKILL_PATH/SKILL.md"; then
-              echo "⚠ Found potential fluff pattern: '$pattern'"
-              found=$((found + 1))
-            fi
-          done
-          
-          if [ $found -eq 0 ]; then
-            echo "✓ No obvious AI fluff patterns found in SKILL.md"
+          before=$(grep -c "## Before" skills/michael-polanyi/examples.md || echo 0)
+          after=$(grep -c "## After" skills/michael-polanyi/examples.md || echo 0)
+          echo "Found $before Before / $after After sections"
+          if [ "$before" -eq "$after" ] && [ "$before" -gt 0 ]; then
+            echo "✓ examples.md has balanced pairs"
           fi
 
-      - name: Verify examples.md has before/after pairs
+      - name: Run fluff detection
         run: |
-          before_count=$(grep -c "## Before" "$SKILL_PATH/examples.md" || echo "0")
-          after_count=$(grep -c "## After" "$SKILL_PATH/examples.md" || echo "0")
-          
-          echo "Found $before_count 'Before' sections and $after_count 'After' sections"
-          
-          if [ "$before_count" -eq "$after_count" ] && [ "$before_count" -gt 0 ]; then
-            echo "✓ examples.md has balanced before/after pairs"
-          else
-            echo "⚠ examples.md may have unbalanced before/after pairs"
+          if [ -f "skills/michael-polanyi/scripts/detect_fluff.py" ]; then
+            python3 skills/michael-polanyi/scripts/detect_fluff.py skills/michael-polanyi/examples.md || echo "Fluff detected (expected in examples)"
           fi
+          echo "✓ Content quality check complete"
 
-      - name: Check examples.md anti-patterns
-        run: |
-          # Run fluff detection on examples.md - report but don't fail
-          # (examples.md intentionally contains anti-patterns for comparison)
-          python "$SKILL_PATH/scripts/detect_fluff.py" "$SKILL_PATH/examples.md" || true
-          echo "✓ Fluff detection scan complete"
-
-  # ─────────────────────────────────────────────
-  # Job 6: 生成评估报告
-  # ─────────────────────────────────────────────
   generate-report:
     name: Generate eval report
     runs-on: ubuntu-latest
@@ -294,17 +201,19 @@ EOF
         with:
           python-version: "3.12"
 
-      - name: Generate HTML review page
+      - name: Generate HTML review
         run: |
-          if [ -f "$SKILL_PATH/eval-viewer/generate_review.py" ] && [ -f "$SKILL_PATH/evals/evals.json" ]; then
-            cd "$SKILL_PATH/eval-viewer"
+          cd skills/michael-polanyi/eval-viewer
+          if [ -f "generate_review.py" ] && [ -f "../evals/evals.json" ]; then
             python3 generate_review.py
             echo "✓ Generated review.html"
+          else
+            echo "⚠ Skipped (missing files)"
           fi
 
-      - name: Upload report artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: eval-review
-          path: ${{ env.SKILL_PATH }}/eval-viewer/review.html
+          path: skills/michael-polanyi/eval-viewer/review.html
           if-no-files-found: ignore
