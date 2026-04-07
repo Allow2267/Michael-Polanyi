@@ -38,3 +38,25 @@ jobs:
             echo "FAIL: evals.json missing"
             exit 1
           fi
+
+      - name: Validate evals.json syntax
+        run: |
+          python3 << 'EOF'
+import json
+import sys
+
+try:
+    with open('skills/michael-polanyi/evals/evals.json') as f:
+        data = json.load(f)
+    print("OK: evals.json is valid JSON")
+except Exception as e:
+    print(f"FAIL: {e}")
+    sys.exit(1)
+
+evals = data.get('evals', [])
+if not evals:
+    print("FAIL: no evals found")
+    sys.exit(1)
+
+print(f"OK: {len(evals)} evals found")
+EOF
