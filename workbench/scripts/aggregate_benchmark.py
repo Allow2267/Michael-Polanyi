@@ -5,10 +5,10 @@ Reads multiple result files and produces aggregated statistics.
 Useful for tracking skill quality over time.
 
 Usage:
-    python aggregate_benchmark.py <results-dir> [--output benchmark.json]
-    
+    python workbench/scripts/aggregate_benchmark.py <results-dir> [--output benchmark.json]
+
 Example:
-    python aggregate_benchmark.py ./results/ --output benchmark.json
+    python workbench/scripts/aggregate_benchmark.py ./results/ --output benchmark.json
 """
 
 import argparse

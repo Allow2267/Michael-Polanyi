@@ -60,13 +60,35 @@ class Match:
     severity: str
 
 
-def scan(text: str, patterns: list[Pattern]) -> list[Match]:
-    results: list[Match] = []
+def lines_for_scan(source: str, text: str) -> list[tuple[int, str]]:
     lines = text.splitlines()
+
+    if Path(source).name != "examples.md":
+        return list(enumerate(lines, start=1))
+
+    selected: list[tuple[int, str]] = []
+    in_practitioner_answer = False
+
+    for line_num, line in enumerate(lines, start=1):
+        if line.startswith("### Practitioner answer"):
+            in_practitioner_answer = True
+            continue
+
+        if in_practitioner_answer and line.startswith("### "):
+            in_practitioner_answer = False
+
+        if in_practitioner_answer:
+            selected.append((line_num, line))
+
+    return selected or list(enumerate(lines, start=1))
+
+
+def scan(source: str, text: str, patterns: list[Pattern]) -> list[Match]:
+    results: list[Match] = []
 
     compiled = [(p, re.compile(p.regex, re.IGNORECASE)) for p in patterns]
 
-    for line_num, line in enumerate(lines, start=1):
+    for line_num, line in lines_for_scan(source, text):
         for pattern, regex in compiled:
             if regex.search(line):
                 # Get the matched substring
@@ -90,7 +112,7 @@ def main():
         source = sys.argv[1]
         text = Path(source).read_text(encoding="utf-8")
 
-    matches = scan(text, PATTERNS)
+    matches = scan(source, text, PATTERNS)
 
     report = {
         "source": source,

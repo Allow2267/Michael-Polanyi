@@ -79,6 +79,7 @@ yarn-error.log*
 .fseventsd
 .DS_Store
 docs/superpowers/
+.worktrees/
 
 # Qwen configuration directory
 .qwen/

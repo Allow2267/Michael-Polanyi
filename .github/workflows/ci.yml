@@ -60,14 +60,14 @@ jobs:
       - name: Check eval files
         run: |
           for f in evals.json prompts.md rubric.md; do
-            test -f "skills/michael-polanyi/evals/$f" && echo "OK: $f" || echo "WARN: $f missing"
+            test -f "workbench/evals/$f" && echo "OK: $f" || echo "WARN: $f missing"
           done
 
       - name: Validate evals.json
         run: |
           python3 - <<'PY'
           import json, sys
-          with open('skills/michael-polanyi/evals/evals.json') as f:
+          with open('workbench/evals/evals.json') as f:
               d = json.load(f)
           evals = d.get('evals', [])
           print(f'OK: {len(evals)} evals found')
@@ -95,7 +95,7 @@ jobs:
       - name: Check Python syntax
         run: |
           shopt -s nullglob
-          for f in skills/michael-polanyi/scripts/*.py skills/michael-polanyi/eval-viewer/*.py; do
+          for f in skills/michael-polanyi/scripts/*.py workbench/scripts/*.py workbench/eval-viewer/*.py; do
             python3 -m py_compile "$f" && echo "OK: $f" || echo "FAIL: $f"
           done
 
@@ -149,12 +149,12 @@ jobs:
 
       - name: Generate HTML review
         run: |
-          cd skills/michael-polanyi/eval-viewer
+          cd workbench/eval-viewer
           test -f generate_review.py && test -f ../evals/evals.json && python3 generate_review.py && echo "OK: review generated" || echo "WARN: skipped"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
           name: eval-review
-          path: skills/michael-polanyi/eval-viewer/review.html
+          path: workbench/eval-viewer/review.html
           if-no-files-found: ignore

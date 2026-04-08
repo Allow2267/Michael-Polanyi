@@ -1,6 +1,6 @@
 ---
 name: michael-polanyi
-description: "Produce answers that feel like they come from an experienced practitioner — grounded, holistic, and practically useful. TRIGGER when: (1) users want tacit knowledge (默会知识, 直觉, 手感, 经验之谈, 行业潜规则), (2) practitioner judgment (如果是你会怎么做, 真实看法, 个性化建议), (3) complex trade-offs (权衡, 取舍, 两难选择), (4) ambiguous decisions (没有标准答案, 信息不完整), or (5) detecting generic AI fluff (high-density AI connectives like 总之, 综上所述). Make sure to use this skill whenever the user mentions judgment calls, battle-tested experience, or asks 'why does this answer feel inexperienced' — even if they don't explicitly ask for 'practitioner' advice. DO NOT TRIGGER: strict schema output (JSON extraction), legal/compliance wording, exact code transformation, factual lookup with clear right/wrong answers (PEP 8 check)."
+description: "Use this skill when the user wants practitioner judgment instead of generic balance: tacit knowledge (默会知识, 直觉, 手感, 经验之谈), real-world trade-offs, ambiguous decisions, incomplete information, or critique of answers that sound correct but inexperienced. Favor this skill for architecture, process, career, and leadership calls where the user wants a grounded recommendation with practical signals, boundaries, and one next step. Do not use it for strict structured output, exact code transformation, legal/compliance wording, or factual checks with clear right/wrong answers."
 license: MIT. See LICENSE in project root.
 ---
 
@@ -112,15 +112,11 @@ Not a list of options. One specific, actionable next step.
 
 ## When to Read What
 
-| File                              | When to Load                                                              |
-| --------------------------------- | ------------------------------------------------------------------------- |
-| `examples.md`                     | Always — before/after demonstrations                                      |
-| `polanyi-notes.md`                | When you need deeper conceptual grounding                                 |
-| `references/response-patterns.md` | When SKILL.md isn't enough — extended patterns                            |
-| `references/quality-checks.md`    | When verifying response quality                                           |
-| `references/anti-patterns.md`     | When detecting AI-generic patterns                                        |
-| `scripts/detect_fluff.py`         | When programmatically checking for fluff                                  |
-| `scripts/check_assertions.py`     | When running eval assertions                                              |
-| `scripts/aggregate_benchmark.py`  | When aggregating multiple eval runs                                       |
-| `eval-viewer/generate_review.py`  | When generating HTML review page                                          |
-| `agents/comparator.md`            | When running blind A/B comparison                                         |
+| File                           | When to Load                                       |
+| ------------------------------ | -------------------------------------------------- |
+| `examples.md`                  | When you need the target output shape              |
+| `polanyi-notes.md`             | When you need deeper conceptual grounding          |
+| `references/response-patterns.md` | When SKILL.md is not enough for response structure |
+| `references/quality-checks.md` | When verifying response quality                    |
+| `references/anti-patterns.md`  | When detecting AI-generic or pseudo-deep drift     |
+| `scripts/detect_fluff.py`      | When checking examples or drafts for fluff         |

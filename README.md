@@ -113,8 +113,10 @@ Expected result:
 ```text
 ~/.claude/skills/michael-polanyi/
   SKILL.md
-  polanyi-notes.md
   examples.md
+  polanyi-notes.md
+  references/
+  scripts/
 ```
 
 ### Codex
@@ -129,8 +131,10 @@ Expected result:
 ```text
 ~/.agents/skills/michael-polanyi/
   SKILL.md
-  polanyi-notes.md
   examples.md
+  polanyi-notes.md
+  references/
+  scripts/
 ```
 
 If your client only loads skills at startup, restart the session after installation.
@@ -169,6 +173,14 @@ The output should usually contain:
 - explicit boundaries or flip conditions
 - a concrete next step
 
+## Maintainer workflow
+
+This repository also includes maintainer tooling under `workbench/`.
+If you are iterating on the skill rather than just installing it, start with:
+
+- `workbench/README.md`
+- `workbench/evals/protocol.md`
+
 ## Troubleshooting
 
 ### The skill does not appear to load
@@ -201,18 +213,19 @@ Re-check the response against the expected traits:
 
 ```text
 skills/michael-polanyi/
-  SKILL.md            # main skill file
-  polanyi-notes.md    # distilled concept notes
-  examples.md         # before/after examples
+  SKILL.md            # main runtime skill entrypoint
+  README.md           # runtime package guide
+  examples.md         # high-value before/after examples
+  polanyi-notes.md    # conceptual grounding
+  references/         # deeper runtime references
+  scripts/            # runtime/lightweight quality helpers
 
-evals/
-  prompts.md          # test prompts
-  rubric.md           # scoring dimensions
-  protocol.md         # how to run baseline vs with-skill evals
-
-.github/
-  ISSUE_TEMPLATE.md
-  pull_request_template.md
+workbench/
+  README.md           # maintainer workflow
+  evals/              # prompts, rubric, eval set, protocol
+  agents/             # blind comparison and grading prompts
+  scripts/            # assertion and benchmark helpers
+  eval-viewer/        # HTML review generator
 ```
 
 ## Evaluation
@@ -221,9 +234,9 @@ Do not judge this project by branding alone. Judge it by output quality.
 
 Use:
 
-- `evals/prompts.md` for prompt sets
-- `evals/rubric.md` for scoring
-- `evals/protocol.md` for the actual test method
+- `workbench/evals/prompts.md` for prompt sets
+- `workbench/evals/rubric.md` for scoring
+- `workbench/evals/protocol.md` for the actual test method
 
 A good "after" answer should become:
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Check assertions against a text file.
 
-Reads evals/evals.json and checks each assertion against the provided text.
+Reads ../evals/evals.json and checks each assertion against the provided text.
 Designed to work with the Michael Polanyi skill evaluation framework.
 
 Usage:
-    python scripts/check_assertions.py <text-file> <eval-id>
-    python scripts/check_assertions.py response.txt 1
+    python workbench/scripts/check_assertions.py <text-file> <eval-id>
+    python workbench/scripts/check_assertions.py response.txt 1
 """
 
 import json
@@ -14,9 +14,11 @@ import re
 import sys
 from pathlib import Path
 
+DEFAULT_EVALS_PATH = Path(__file__).resolve().parent.parent / "evals" / "evals.json"
 
-def load_evals(path: str = "evals/evals.json") -> dict:
-    with open(path, encoding="utf-8") as f:
+
+def load_evals(path: Path = DEFAULT_EVALS_PATH) -> dict:
+    with path.open(encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -66,7 +68,7 @@ def check_assertion(text: str, assertion: dict) -> dict:
 
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python check_assertions.py <text-file> <eval-id>")
+        print("Usage: python workbench/scripts/check_assertions.py <text-file> <eval-id>")
         sys.exit(1)
 
     text_file = sys.argv[1]

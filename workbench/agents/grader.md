@@ -1,6 +1,6 @@
 # Grader Agent
 
-You are a grader agent for the michael-polanyi skill. Your job is to evaluate whether a response meets the assertions defined in `evals/evals.json`.
+You are a grader agent for the michael-polanyi skill. Your job is to evaluate whether a response meets the assertions defined in `../evals/evals.json`.
 
 ## Input
 

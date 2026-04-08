@@ -1,56 +1,42 @@
-# Michael Polanyi — Practitioner Judgment Skill
+# Michael Polanyi Skill Package
 
-## What This Skill Does
+This directory is the runtime package for the Michael Polanyi skill.
+It contains only the files Claude should use at runtime to produce grounded, practitioner-style judgment.
 
-Produces answers that feel like they come from an experienced practitioner — grounded, holistic, and practically useful — for ambiguous, trade-off-heavy scenarios where generic AI answers sound correct but useless.
+## Runtime files
 
-## When to Use
+| File | Role |
+| --- | --- |
+| `SKILL.md` | Trigger contract, response contract, and routing entrypoint |
+| `examples.md` | High-value before/after examples that teach output shape |
+| `polanyi-notes.md` | Conceptual grounding for tacit knowledge and practitioner judgment |
+| `references/` | Deeper anti-pattern, quality-check, and response-pattern material |
+| `scripts/detect_fluff.py` | Lightweight helper for checking generic AI language drift |
 
-| Scenario | Examples |
-|----------|----------|
-| Architecture decisions | "能不能上生产？", "要不要拆微服务？" |
-| Team dynamics | "团队推进不动", "项目返工" |
-| Career choices | "职业选择的隐性成本", "两份offer怎么选" |
-| Incomplete information | "信息不够但老板现在就要建议" |
-| Tacit knowledge | "调试手感是什么", "行业潜规则" |
-| Critique of answers | "为什么这段回答看起来不像做过事的人写的" |
+## Installed surface
 
-## File Structure
+When copied into `~/.claude/skills/michael-polanyi/`, the installed package should look like this:
 
-```
+```text
 michael-polanyi/
-├── SKILL.md                      # Main skill definition (auto-triggered)
-├── examples.md                   # Before/after demonstrations
-├── polanyi-notes.md              # Core concept reference
-├── scripts/
-│   └── detect_fluff.py           # AI-generic pattern detector
-└── references/
-    └── response-patterns.md      # Extended patterns and deep analysis
+  SKILL.md
+  examples.md
+  polanyi-notes.md
+  references/
+  scripts/
 ```
 
-## Quick Start
+## Editing guidance
 
-Just describe your situation naturally. The skill will auto-trigger when it detects:
-- Requests for practitioner judgment
-- Ambiguous decisions with trade-offs
-- Tacit knowledge questions
-- Critiques of generic AI answers
+Change these files based on intent:
 
-## Design Philosophy
+- edit `SKILL.md` when changing trigger logic or the minimum response contract
+- edit `examples.md` when changing the target response shape
+- edit `polanyi-notes.md` when changing conceptual grounding
+- edit `references/` when moving long explanations out of `SKILL.md`
+- edit `scripts/detect_fluff.py` only when changing the lightweight runtime quality helper
 
-This skill is inspired by Michael Polanyi's concepts of **tacit knowledge** and **personal knowledge**. Key principles:
+## Not part of the runtime package
 
-1. **Lead with judgment** — Start with a position, not a preamble
-2. **Surface signals** — Name what experienced practitioners notice
-3. **Articulate trade-offs** — Every judgment has conditions
-4. **End with action** — One concrete next step, not a menu
-
-## Testing
-
-```bash
-# Run fluff detection on any response
-python scripts/detect_fluff.py <response-file>
-
-# Test with examples
-python scripts/detect_fluff.py examples.md
-```
+Maintainer-only evaluation and review tooling lives at the repository root under `../../workbench/`.
+That tooling supports iteration on the skill, but it is not part of the runtime package contract.
