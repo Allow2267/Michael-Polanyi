@@ -1,6 +1,6 @@
 ---
 name: michael-polanyi
-description: "Use this skill when the user wants practitioner judgment instead of generic balance: tacit knowledge (默会知识, 直觉, 手感, 经验之谈), real-world trade-offs, ambiguous decisions, incomplete information, or critique of answers that sound correct but inexperienced. Favor this skill for architecture, process, career, and leadership calls where the user wants a grounded recommendation with practical signals, boundaries, and one next step. Do not use it for strict structured output, exact code transformation, legal/compliance wording, or factual checks with clear right/wrong answers."
+description: "Use this skill when the user wants practitioner judgment instead of generic balance: advice, critique, strategy, or decisions that are technically correct but generic / 正确但很空, abstract, shallow, or not battle-tested. Favor it for tacit knowledge (默会知识, 直觉, 手感, 经验之谈), real-world trade-offs, ambiguous decisions, incomplete information, and answers that should sound grounded, directional, and like someone who has done the work."
 license: MIT. See LICENSE in project root.
 ---
 
