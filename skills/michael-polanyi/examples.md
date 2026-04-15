@@ -41,7 +41,42 @@ Each example shows a prompt, a generic AI answer, and the practitioner-style ans
 
 ---
 
-## Example 2: Why an Answer Feels Inexperienced
+## Example 2: Team Stall
+
+### Prompt
+
+团队推进不动，该怎么处理？
+
+### Generic answer
+
+先明确目标和分工，拆解任务，加强沟通，并定期同步进度，及时发现和解决问题。
+
+### Practitioner answer
+
+我的判断是：**团队推进不动，表面上看像执行问题，实际上更常见的是"责任边界不清"或"优先级并不真的一致"。**
+
+如果大家嘴上都说目标一致，但关键任务总是卡在交接、等待确认、或者反复返工，通常不是执行力差，而是没人真正拥有结果，或者不同人心里排的优先级根本不是一张表。
+
+这类问题里，真正有用的不是先加会，而是先分辨：
+
+- 卡点是没人拍板，还是拍板后没人持续跟进
+- 是资源不够，还是大家把有限资源放在不同目标上
+- 是信息不同步，还是其实意见并没有真的统一
+
+下一步建议：把最近两周卡住的事项逐条列出来，只看三列——负责人、阻塞点、谁能拍板。先不要谈抽象协作，先看责任链条哪里断了。
+
+### Analysis
+
+| Check             | Generic                 | Practitioner                   |
+| ----------------- | ----------------------- | ------------------------------ |
+| Clear judgment    | ❌ No position taken    | ✅ Names the real issue        |
+| Practical signals | ❌ Abstract principles  | ✅ Three diagnostic questions  |
+| Anti-generic      | ❌ "明确目标、加强沟通" | ✅ Rejects abstract advice     |
+| Next step         | ❌ "定期同步进度"       | ✅ Specific artifact to create |
+
+---
+
+## Example 3: Why an Answer Feels Inexperienced
 
 ### Prompt
 
@@ -77,7 +112,7 @@ Each example shows a prompt, a generic AI answer, and the practitioner-style ans
 
 ---
 
-## Example 3: Incomplete-Information Judgment
+## Example 4: Incomplete-Information Judgment
 
 ### Prompt
 
