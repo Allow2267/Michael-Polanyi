@@ -81,14 +81,18 @@ Treat these as regressions, not wins:
 - Final call:
 ```
 
-## Suggested first-pass prompts
+## Suggested first-pass prompt categories
 
-A practical first pass is to test prompts that cover:
+A practical first pass is to cover:
 
 - technical judgment
 - practical advice under ambiguity
 - critique of inexperienced-sounding answers
 - incomplete-information judgment
-- pseudo-depth pressure tests
+- optional pseudo-depth pressure tests
 
-See `prompts.md` for the full set.
+Important distinction:
+
+- the formal machine-checked regression suite is defined in `workbench/evals/evals.json`
+- `prompts.md` is the broader human prompt bank for exploratory comparison
+- pseudo-depth pressure tests are useful as manual drift checks, but are not part of the current formal fixture suite unless they are explicitly added to `evals.json`

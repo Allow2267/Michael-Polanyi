@@ -98,4 +98,6 @@ What should transfer:
 - visible boundaries
 - one next step
 
-For the full canonical example set, including the pseudo-depth pressure test, see the repo’s [examples.md](https://github.com/August1314/Michael-Polanyi/blob/main/skills/michael-polanyi/examples.md).
+For the full current runtime example set, see the repo’s [examples.md](https://github.com/August1314/Michael-Polanyi/blob/main/skills/michael-polanyi/examples.md).
+
+If you want the broader maintainer-side guidance on anti-patterns and pseudo-depth drift, use the [workbench guide](https://github.com/August1314/Michael-Polanyi/blob/main/workbench/README.md) instead.
