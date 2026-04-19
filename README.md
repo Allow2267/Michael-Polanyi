@@ -198,6 +198,8 @@ If you are iterating on the skill rather than just installing it, start with:
 
 - `workbench/README.md`
 - `workbench/evals/protocol.md`
+- `registry/skillhub-submission.json` if you are submitting the skill to an external market index such as aghub / skillhub
+- `registry/README.md` if you need a skillhub-ready zip package and update manifest
 
 The published GitHub Wiki is versioned in this repository under `docs/wiki/`.
 
@@ -246,6 +248,10 @@ workbench/
   agents/             # blind comparison and grading prompts
   scripts/            # assertion and benchmark helpers
   eval-viewer/        # HTML review generator
+
+registry/
+  skillhub-submission.json  # minimal market/registry submission record
+  README.md                 # package + submission notes
 
 docs/wiki/
   *.md                # versioned source for the published GitHub Wiki
