@@ -29,6 +29,19 @@ michael-polanyi/
 python3 scripts/build_skill_package.py --clean
 ```
 
+This is the default development build. It emits a version like
+`0.5.3+<commit>` and leaves `package_url` / `update_url` empty so the metadata
+can be filled after upload.
+
+For a formal GitHub release asset, use:
+
+```bash
+python3 scripts/build_skill_package.py --clean --release
+```
+
+That mode uses the plain top `CHANGELOG.md` version, for example `0.5.3`, and
+precomputes the expected GitHub release asset URLs under `releases/download/`.
+
 This writes:
 
 - `dist/michael-polanyi-<version>.zip`

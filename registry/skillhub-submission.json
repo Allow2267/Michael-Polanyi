@@ -4,19 +4,19 @@
   "displayName": "Michael Polanyi",
   "summary": "Practitioner-judgment writing skill for grounded, directional, bounded answers under ambiguity, trade-offs, critique, and incomplete information.",
   "description": "Use this skill when the user wants practitioner judgment instead of generic balance: advice, critique, strategy, or decision-making help that is technically correct but generic / 正确但很空, abstract, shallow, or not battle-tested.",
-  "version": "0.5.2+8903304",
+  "version": "0.5.3",
   "source": "github",
   "category": "developer-tools",
   "owner_name": "August1314",
   "homepage": "https://github.com/August1314/Michael-Polanyi",
   "repository": "August1314/Michael-Polanyi",
   "repository_url": "https://github.com/August1314/Michael-Polanyi",
-  "repo_archive_url": "https://github.com/August1314/Michael-Polanyi/archive/8903304088c118ee57d4879b4b9f70e32d1bba2c.zip",
+  "repo_archive_url": "https://github.com/August1314/Michael-Polanyi/archive/refs/tags/v0.5.3.zip",
   "package_path": "skills/michael-polanyi",
-  "package_url": "",
-  "update_url": "",
+  "package_url": "https://github.com/August1314/Michael-Polanyi/releases/download/v0.5.3/michael-polanyi-0.5.3.zip",
+  "update_url": "https://github.com/August1314/Michael-Polanyi/releases/download/v0.5.3/michael-polanyi-update.json",
   "sha256": "5641ec1994605f8a478c344cbc4d484381416eb79328164fc5f3e98ed79360a4",
-  "package_filename": "michael-polanyi-0.5.2+8903304.zip",
+  "package_filename": "michael-polanyi-0.5.3.zip",
   "update_manifest_filename": "michael-polanyi-update.json",
   "tags": [
     "agent-skill",
@@ -33,6 +33,6 @@
     "This file is a submission record for aghub/skillhub-style registries.",
     "Do not publish the full repository archive as the installable package directly unless the registry can extract package_path.",
     "The installable zip should expose SKILL.md at the archive root and should be built from skills/michael-polanyi/.",
-    "After uploading the zip and update manifest, replace package_url / update_url with the published remote URLs."
+    "package_url / update_url point to the expected GitHub release assets."
   ]
 }

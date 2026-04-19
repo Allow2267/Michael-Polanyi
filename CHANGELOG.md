@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.3] - 2026-04-19
+
+### Added
+
+- **registry/skillhub-submission.json**: added a minimal submission record for aghub / skillhub-style registries
+- **registry/README.md**: documented the packaging workflow for skillhub-style release assets
+- **scripts/build_skill_package.py**: added a dedicated runtime package builder that emits installable zip assets and update manifests
+
+### Changed
+
+- **scripts/build_skill_package.py**: added a `--release` mode so formal GitHub release assets use a clean version number and predictable download URLs
+
 ## [0.5.2] - 2026-04-10
 
 ### Changed
