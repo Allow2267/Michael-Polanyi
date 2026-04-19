@@ -23,6 +23,12 @@ mkdir -p ~/.claude/skills
 cp -R skills/michael-polanyi ~/.claude/skills/
 ```
 
+If you use the `skills.sh` ecosystem, install it directly from GitHub:
+
+```bash
+npx skills add https://github.com/August1314/Michael-Polanyi --skill michael-polanyi
+```
+
 Restart your client if it only loads skills at startup.
 
 Then try a prompt like:
@@ -108,6 +114,12 @@ mkdir -p ~/.claude/skills
 cp -R skills/michael-polanyi ~/.claude/skills/
 ```
 
+Or, with `skills.sh` / `npx skills`:
+
+```bash
+npx skills add https://github.com/August1314/Michael-Polanyi --skill michael-polanyi --agent claude-code
+```
+
 Expected result:
 
 ```text
@@ -124,6 +136,12 @@ Expected result:
 ```bash
 mkdir -p ~/.agents/skills
 cp -R skills/michael-polanyi ~/.agents/skills/
+```
+
+Or, with `skills.sh` / `npx skills`:
+
+```bash
+npx skills add https://github.com/August1314/Michael-Polanyi --skill michael-polanyi --agent codex
 ```
 
 Expected result:
