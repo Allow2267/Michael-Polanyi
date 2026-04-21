@@ -59,6 +59,10 @@ Avoid contributions that:
 - make the repository heavier without validation value
 - change wording without improving examples or evals
 
+## Subagent-Driven Development
+
+For isolated, verifiable tasks, maintainers can use a controller/subagent workflow. See [Subagent Workflow](Subagent-Workflow) for when this is appropriate and how to use it.
+
 ## Current Follow-Up Issues
 
 The current focused follow-up queue is:

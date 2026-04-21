@@ -1,6 +1,7 @@
 # Michael Polanyi Workbench
 
 This directory contains **maintainer-only** tooling for evaluating and refining the Michael Polanyi skill.
+For isolated, verifiable maintainer tasks that use a controller plus Claude implementer flow, see [Subagent Workflow](../docs/wiki/Subagent-Workflow.md).
 
 The published GitHub Wiki is versioned in the main repository under `docs/wiki/`.
 
